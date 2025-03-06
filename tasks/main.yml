@@ -1,9 +1,11 @@
 ---
 - name: Ensure Pip is installed.
-  package: name=python-pip state=present
+  ansible.builtin.package:
+    name: python-pip
+    state: present
 
 - name: Ensure pip_install_packages are installed.
-  pip:
+  ansible.legacy.pip:
     name: "{{ item.name | default(item) }}"
     version: "{{ item.version | default(omit) }}"
     state: "{{ item.state | default(omit) }}"
